@@ -14,10 +14,14 @@
 
 <form onsubmit={addQuestion}>
   <label for="title">Title: </label>
-  <input id="title" name="title" type="text" placeholder="Enter a title" upvotes=0/>
+  <div>
+    <input id="title" name="title" type="text" placeholder="Enter a title" upvotes=0/>
+  </div>
   <div>
     <label for="text">Question: </label>
-    <input id="text" name="text" type="text" placeholder="Enter the question" />
+    <div>
+      <textarea id="text" name="text" placeholder="Enter the question"></textarea>
+    </div>
   </div>
     <input type="submit" value="Add Question" />
 </form>
