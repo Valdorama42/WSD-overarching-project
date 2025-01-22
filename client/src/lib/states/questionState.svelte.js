@@ -30,6 +30,13 @@ const useQState = () => {
       questionState = questionState.filter((q) => q.id !== id);
       saveQuestions();
     },
+    upVote: (id) => {
+      const q = questionState.find((q) => q.id === id);
+      if (q) {
+        q.count += 1;
+        saveQuestions;
+      };
+    },
   };
 };
 
