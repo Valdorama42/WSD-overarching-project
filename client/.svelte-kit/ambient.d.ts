@@ -26,43 +26,47 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const MallocNanoZone: string;
-	export const GIT_ASKPASS: string;
-	export const SHELL: string;
-	export const TERM_PROGRAM: string;
-	export const XPC_FLAGS: string;
-	export const VSCODE_GIT_ASKPASS_MAIN: string;
-	export const __CF_USER_TEXT_ENCODING: string;
-	export const TERM: string;
 	export const COMMAND_MODE: string;
-	export const XPC_SERVICE_NAME: string;
-	export const HOMEBREW_CELLAR: string;
-	export const SSH_AUTH_SOCK: string;
-	export const LOGNAME: string;
-	export const PATH: string;
-	export const VSCODE_GIT_IPC_HANDLE: string;
-	export const VSCODE_GIT_ASKPASS_NODE: string;
-	export const __CFBundleIdentifier: string;
-	export const HOMEBREW_PREFIX: string;
-	export const LANG: string;
-	export const HOMEBREW_REPOSITORY: string;
-	export const USER_ZDOTDIR: string;
-	export const TERM_PROGRAM_VERSION: string;
-	export const NODE_ENV: string;
-	export const VSCODE_INJECTION: string;
-	export const ZDOTDIR: string;
-	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
-	export const USER: string;
-	export const INFOPATH: string;
-	export const npm_config_user_agent: string;
-	export const HOME: string;
-	export const TMPDIR: string;
 	export const _: string;
 	export const PWD: string;
+	export const HOME: string;
+	export const SHELL: string;
+	export const SHLVL: string;
+	export const NVM_CD_FLAGS: string;
+	export const TERM_PROGRAM: string;
+	export const TERM_PROGRAM_VERSION: string;
+	export const NVM_INC: string;
+	export const NVM_BIN: string;
+	export const USER_ZDOTDIR: string;
+	export const NVM_DIR: string;
+	export const VSCODE_GIT_ASKPASS_NODE: string;
+	export const VSCODE_GIT_IPC_HANDLE: string;
+	export const XPC_FLAGS: string;
+	export const GIT_ASKPASS: string;
+	export const HOMEBREW_CELLAR: string;
 	export const INIT_CWD: string;
 	export const OLDPWD: string;
-	export const SHLVL: string;
+	export const SSH_AUTH_SOCK: string;
+	export const __CF_USER_TEXT_ENCODING: string;
+	export const HOMEBREW_REPOSITORY: string;
+	export const NODE_ENV: string;
+	export const ZDOTDIR: string;
+	export const __CFBundleIdentifier: string;
+	export const USER: string;
 	export const COLORTERM: string;
+	export const TERM: string;
+	export const INFOPATH: string;
+	export const PATH: string;
+	export const VSCODE_INJECTION: string;
+	export const VSCODE_GIT_ASKPASS_MAIN: string;
+	export const TMPDIR: string;
+	export const HOMEBREW_PREFIX: string;
+	export const MallocNanoZone: string;
+	export const LANG: string;
+	export const XPC_SERVICE_NAME: string;
+	export const LOGNAME: string;
+	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
+	export const npm_config_user_agent: string;
 }
 
 /**
@@ -75,7 +79,7 @@ declare module '$env/static/private' {
  * ```
  */
 declare module '$env/static/public' {
-	
+	export const PUBLIC_API_URL: string;
 }
 
 /**
@@ -94,43 +98,47 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		MallocNanoZone: string;
-		GIT_ASKPASS: string;
-		SHELL: string;
-		TERM_PROGRAM: string;
-		XPC_FLAGS: string;
-		VSCODE_GIT_ASKPASS_MAIN: string;
-		__CF_USER_TEXT_ENCODING: string;
-		TERM: string;
 		COMMAND_MODE: string;
-		XPC_SERVICE_NAME: string;
-		HOMEBREW_CELLAR: string;
-		SSH_AUTH_SOCK: string;
-		LOGNAME: string;
-		PATH: string;
-		VSCODE_GIT_IPC_HANDLE: string;
-		VSCODE_GIT_ASKPASS_NODE: string;
-		__CFBundleIdentifier: string;
-		HOMEBREW_PREFIX: string;
-		LANG: string;
-		HOMEBREW_REPOSITORY: string;
-		USER_ZDOTDIR: string;
-		TERM_PROGRAM_VERSION: string;
-		NODE_ENV: string;
-		VSCODE_INJECTION: string;
-		ZDOTDIR: string;
-		ORIGINAL_XDG_CURRENT_DESKTOP: string;
-		USER: string;
-		INFOPATH: string;
-		npm_config_user_agent: string;
-		HOME: string;
-		TMPDIR: string;
 		_: string;
 		PWD: string;
+		HOME: string;
+		SHELL: string;
+		SHLVL: string;
+		NVM_CD_FLAGS: string;
+		TERM_PROGRAM: string;
+		TERM_PROGRAM_VERSION: string;
+		NVM_INC: string;
+		NVM_BIN: string;
+		USER_ZDOTDIR: string;
+		NVM_DIR: string;
+		VSCODE_GIT_ASKPASS_NODE: string;
+		VSCODE_GIT_IPC_HANDLE: string;
+		XPC_FLAGS: string;
+		GIT_ASKPASS: string;
+		HOMEBREW_CELLAR: string;
 		INIT_CWD: string;
 		OLDPWD: string;
-		SHLVL: string;
+		SSH_AUTH_SOCK: string;
+		__CF_USER_TEXT_ENCODING: string;
+		HOMEBREW_REPOSITORY: string;
+		NODE_ENV: string;
+		ZDOTDIR: string;
+		__CFBundleIdentifier: string;
+		USER: string;
 		COLORTERM: string;
+		TERM: string;
+		INFOPATH: string;
+		PATH: string;
+		VSCODE_INJECTION: string;
+		VSCODE_GIT_ASKPASS_MAIN: string;
+		TMPDIR: string;
+		HOMEBREW_PREFIX: string;
+		MallocNanoZone: string;
+		LANG: string;
+		XPC_SERVICE_NAME: string;
+		LOGNAME: string;
+		ORIGINAL_XDG_CURRENT_DESKTOP: string;
+		npm_config_user_agent: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
@@ -150,6 +158,7 @@ declare module '$env/dynamic/private' {
  */
 declare module '$env/dynamic/public' {
 	export const env: {
+		PUBLIC_API_URL: string;
 		[key: `PUBLIC_${string}`]: string | undefined;
 	}
 }
