@@ -1,14 +1,14 @@
 <script>
-    import { useQuestionState } from "$lib/states/questionState.svelte.js";
-    import { QuestionItem } from "./QuestionItem.svelte";
+    import { useQState } from "$lib/states/questionState.svelte.js";
+    import QuestionItem from "./QuestionItem.svelte";
 
-    let questionState = useQuestionState();
-</script>
+    let qState = useQState();
+  </script>
 
-<ul>
-    {#each $questionState.questions as question}
-        <li>    
-            <QuestionItem { question } />
-        </li>
+  <ul>
+    {#each qState.questions as q}
+      <li>
+        <QuestionItem { q } />
+      </li>
     {/each}
-</ul>
+  </ul>
