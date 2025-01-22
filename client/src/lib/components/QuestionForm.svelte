@@ -12,11 +12,11 @@
 </script>
 
 <form onsubmit={addQuestion}>
-  <label for="name">Question</label>
-  <input id="name" name="name" type="text" placeholder="Enter a new question" />
+  <label for="title">Title: </label>
+  <input id="title" name="title" type="text" placeholder="Enter a title" />
   <div>
-    <input id="done" name="done" type="checkbox" />
-    <label for="done">Done</label>
+    <label for="text">Question: </label>
+    <input id="text" name="text" type="text" placeholder="Enter the question" />
   </div>
-  <input type="submit" value="Add Question" />
+    <input type="submit" value="Add Question" />
 </form>

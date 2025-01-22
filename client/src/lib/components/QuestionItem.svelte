@@ -6,12 +6,8 @@
     let { q } = $props();
 </script>
 
-  <input
-    type="checkbox"
-    onchange={() => qState.changeDone(todo.id)}
-    id={q.id}
-  />
-  <label for={q.id}>
-    {q.name} ({q.done ? "done" : "not done"})
-  </label>
-  <button onclick={() => qState.remove(q.id)}>Remove</button>
+<label for={q.id}>
+  {q.title} ({q.done ? "done" : "not done"})
+</label>
+<button>Upvote</button>
+<button onclick={() => qState.remove(q.id)}>Remove</button>
