@@ -4,12 +4,12 @@
   
 </script>
   
-<h1>Todos</h1>
+<h1>Questions</h1>
   
-<h2>Add Todo</h2>
+<h2>Add a Question</h2>
 
 <TodoForm />
   
-<h2>Existing todos</h2>
+<h2>Existing questions:</h2>
   
 <TodoList />
