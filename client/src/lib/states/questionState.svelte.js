@@ -21,11 +21,6 @@ const useQState = () => {
       questionState.push(q);
       saveQuestions();
     },
-    changeDone: (id) => {
-      const q = questionState.find((q) => q.id === id);
-      q.done = !q.done;
-      saveQuestions();
-    },
     remove: (id) => {
       questionState = questionState.filter((q) => q.id !== id);
       saveQuestions();
