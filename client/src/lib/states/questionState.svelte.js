@@ -21,7 +21,7 @@ const useQState = () => {
       questionState.push(q);
       saveQuestions();
     },
-    remove: (id) => {
+    delete: (id) => {
       questionState = questionState.filter((q) => q.id !== id);
       saveQuestions();
     },
