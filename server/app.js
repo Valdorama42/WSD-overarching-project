@@ -36,20 +36,21 @@ app.get("/courses/:id/questions", (c) => {
 
 app.post("/courses/:id/questions", async (c) => {
   const body = await c.req.json();
+  const { text, title } = body;
   const id = questions.length + 1;
-  const question = { id, body, upvotes: 0 };
+  const question = { id, text, title, upvotes: 0 };
   questions.push(question);
   return c.json(question);
 });
 
-app.post("/courses:id/questions/:qId/upvote", (c) => {
+app.post("/courses/:id/questions/:qId/upvote", (c) => {
   const qId = Number(c.req.param("qId"));
   const question = questions.find((q) => q.id === qId);
-  question.upvotes++;
-  return c.json(questions);
+  question.upvotes += 1;
+  return c.json(question);
 });
 
-app.delete("/courses:id/questions/:qId", (c) => {
+app.delete("/courses/:id/questions/:qId", (c) => {
   const qId = Number(c.req.param("qId"));
   questions = questions.filter((q) => q.id !== qId);
   return c.json(questions);
