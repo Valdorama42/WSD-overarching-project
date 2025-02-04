@@ -52,8 +52,9 @@ app.post("/courses/:id/questions/:qId/upvote", (c) => {
 
 app.delete("/courses/:id/questions/:qId", (c) => {
   const qId = Number(c.req.param("qId"));
+  const removed = questions.find((q) => q.id === qId);
   questions = questions.filter((q) => q.id !== qId);
-  return c.json(questions);
+  return c.json(removed);
 });
 
 export default app;
