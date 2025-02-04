@@ -9,6 +9,8 @@ const sql = postgres();
 app.use("/*", cors());
 app.use("/*", logger());
 
+let questions = [];
+
 app.get("/courses", (c) => {
   return c.json( {"courses": [ {"id": 1, "name": "Web Software Development" }, {"id": 2, "name": "Device-Agnostic Design" } ] })
 });
@@ -24,16 +26,5 @@ app.post("/courses", async (c) => {
   return c.json( {"course": { "id": 3, name}} );
 });
 
-app.get("/courses/:id/topics", (c) => {
-  return c.json( {"topics": [ {"id": 1, "name": "Topic 1" }, {"id": 2, "name": "Topic 2" } ] });
-});
 
-app.get("/courses/:cId/topics/:tId/posts", (c) => {
-  return c.json( {"posts": [ {"id": 1, "title": "Post 1" }, {"id": 2, "title": "Post 2" } ] });
-});
-
-app.get("/courses/:cId/topics/:tId/posts/:pId", (c) => {
-  const pId = Number(c.req.param("pId"));
-  return c.json( {"post": { "id": pId, "title": "Post Title" }, "answers": [{"id":1, "content": "Answer 1"}, {"id": 2, "content": "Answer 2"}]} );
-});
 export default app;
