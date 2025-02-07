@@ -1,12 +1,10 @@
 <script>
-    import { useQState } from "$lib/states/questionState.svelte.js";
     import QuestionItem from "./QuestionItem.svelte";
-
-    let qState = useQState();
+    export let questions = [];
   </script>
 
   <ul>
-    {#each qState.questions as q}
+    {#each questions as q (q.id)}
       <li>
         <QuestionItem { q } />
       </li>
