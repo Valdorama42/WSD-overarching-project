@@ -12,9 +12,8 @@ app.use("/*", logger());
 app.get("/courses", (c) => {
   return c.json( {"courses": [ 
     {"id": 1, "name": "Web Software Development" }, 
-    {"id": 2, "name": "Device-Agnostic Design" } 
-  ], 
-});
+    {"id": 2, "name": "Device-Agnostic Design" } ],
+  });
 });
 
 app.get("/courses/:id", (c) => {

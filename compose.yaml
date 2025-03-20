@@ -1,4 +1,4 @@
-  services:
+services:
   client:
     build: client
     restart: unless-stopped
@@ -10,7 +10,7 @@
       - server
 
   database:
-    container_name: wsd_project_database
+    container_name: postgresql_database1
     image: postgres:17.0
     restart: unless-stopped
     env_file:
