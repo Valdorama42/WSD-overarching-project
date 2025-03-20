@@ -1,58 +1,67 @@
 import { Hono } from "@hono/hono";
 import { cors } from "@hono/hono/cors";
 import { logger } from "@hono/hono/logger";
-import postgres from "postgres";
+import * as courseRepository from "./repositories/courseRepository.js";
+import * as questionsRepository from "./repositories/questionsRepository.js";
 
 const app = new Hono();
-const sql = postgres();
 
 app.use("/*", cors());
 app.use("/*", logger());
 
-app.get("/courses", (c) => {
-  return c.json( {"courses": [ 
-    {"id": 1, "name": "Web Software Development" }, 
-    {"id": 2, "name": "Device-Agnostic Design" } ],
-  });
+app.get("/api/courses", async (c) => {
+  const courses = await courseRepository.getAllCourses();
+  return c.json({ courses });
 });
 
-app.get("/courses/:id", (c) => {
+app.get("/api/courses/:id", async (c) => {
   const id = Number(c.req.param("id"));
-  return c.json ( {"course": { id , "name": "Course Name" } } );
+  const course = await courseRepository.getCourseById(id);
+  return c.json({ course });
 });
 
-app.post("/courses", async (c) => {
-  const request = await c.req.json();
-  const name = request.name
-  return c.json( {"course": { "id": 3, name}} );
+app.post("/api/courses", async (c) => {
+  const name = await c.req.json();
+  if (!name || name.length < 3) {
+    return c.json({ error: "Course name must be at least 3 characters long" }, 400);
+  }
+  const course = await courseRepository.createCourse(name);
+  return c.json({ course });
 });
 
-let questions = [];
-
-app.get("/courses/:id/questions", (c) => {
-  return c.json(questions);
+app.delete("/api/courses/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  const course = await courseRepository.deleteCourse(id);
+  return c.json({ course });
 });
 
-app.post("/courses/:id/questions", async (c) => {
-  const body = await c.req.json();
-  const { text, title } = body;
-  const id = questions.length + 1;
-  const question = { id, text, title, upvotes: 0 };
-  questions.push(question);
+app.get("/api/courses/:id/questions", async (c) => {
+  const courseId = Number(c.req.param("id"));
+  const questions = await questionsRepository.getQuestionsForCourse(courseId);
+  return c.json({ questions });
+});
+
+app.post("/api/courses/:id/questions", async (c) => {
+  const courseId = Number(c.req.param("id"));
+  const { title, text } = await c.req.json();
+  if (!title || title.length < 3 || !text || text.length < 3) {
+    return c.json({ error: "Question title and text must be at least 3 characters long" }, 400);
+  }
+  const question = await questionsRepository.createQuestion(courseId, title, text);
   return c.json(question);
 });
 
-app.post("/courses/:id/questions/:qId/upvote", (c) => {
+app.post("/api/courses/:id/questions/:qId/upvote", async (c) => {
+  const courseId = Number(c.req.param("id"));
   const qId = Number(c.req.param("qId"));
-  const question = questions.find((q) => q.id === qId);
-  question.upvotes += 1;
+  const question = await questionsRepository.upvoteQuestion(courseId, qId);
   return c.json(question);
 });
 
-app.delete("/courses/:id/questions/:qId", (c) => {
+app.delete("/api/courses/:id/questions/:qId", (c) => {
+  const courseId = Number(c.req.param("id"));
   const qId = Number(c.req.param("qId"));
-  const removed = questions.find((q) => q.id === qId);
-  questions = questions.filter((q) => q.id !== qId);
+  const removed = questionsRepository.deleteQuestion(courseId, qId);
   return c.json(removed);
 });
 
