@@ -3,20 +3,24 @@
     import QuestionForm from "./QuestionForm.svelte";
     import QuestionList from "./QuestionList.svelte";
     import { getQuestions } from "$lib/api.js";
+    export let courseId;
   
     let questions = [];
-
-    onMount(async () => {
-        questions = await getQuestions();
+  
+    const refreshQuestions = async () => {
+      questions = await getQuestions(courseId);
+    };
+  
+    onMount(() => {
+      refreshQuestions();
     });
-</script>
+  </script>
   
-<h1>Questions</h1>
+  <h1>Questions</h1>
+  <h2>Add a Question</h2>
+  <!-- When a new question is added, refreshQuestions will be triggered -->
+  <QuestionForm {courseId} on:questionAdded={refreshQuestions} />
   
-<h2>Add a Question</h2>
-
-<QuestionForm />
-  
-<h2>Existing questions:</h2>
-  
-<QuestionList {questions}/>
+  <h2>Existing Questions:</h2>
+  <!-- Listen for refresh events (upvote/delete) from QuestionList -->
+  <QuestionList {questions} {courseId} on:refresh={refreshQuestions} />

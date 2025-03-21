@@ -1,15 +1,12 @@
 import { PUBLIC_API_URL } from "$env/static/public";
 
-const COURSE_ID = 1;
-const BASE_URL = `${PUBLIC_API_URL}/api/courses/${COURSE_ID}/questions`;
-
-export async function getQuestions() {
-  const response = await fetch(BASE_URL);
+export async function getQuestions(courseId) {
+  const response = await fetch(`${PUBLIC_API_URL}/api/courses/${courseId}/questions`);
   return response.json();
 }
 
-export async function addQuestion(question) {
-  const response = await fetch(BASE_URL, {
+export async function addQuestion(courseId, question) {
+  const response = await fetch(`${PUBLIC_API_URL}/api/courses/${courseId}/questions`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(question)
@@ -17,15 +14,15 @@ export async function addQuestion(question) {
   return response.json();
 }
 
-export async function upvoteQuestion(qId) {
-  const response = await fetch(`${BASE_URL}/${qId}/upvote`, {
+export async function upvoteQuestion(courseId, qId) {
+  const response = await fetch(`${PUBLIC_API_URL}/api/courses/${courseId}/questions/${qId}/upvote`, {
     method: "POST"
   });
   return response.json();
 }
 
-export async function deleteQuestion(qId) {
-  const response = await fetch(`${BASE_URL}/${qId}`, {
+export async function deleteQuestion(courseId, qId) {
+  const response = await fetch(`${PUBLIC_API_URL}/api/courses/${courseId}/questions/${qId}`, {
     method: "DELETE"
   });
   return response.json();
