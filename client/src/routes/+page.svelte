@@ -1,5 +1,5 @@
-<script>
-    import Questions from "../lib/components/Questions.svelte";
-</script>
-  
-<Questions />
+<h1>Welcome!</h1>
+
+<nav>
+  <a href="/courses">Courses</a>
+</nav>
