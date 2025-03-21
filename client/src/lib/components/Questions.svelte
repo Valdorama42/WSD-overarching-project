@@ -16,11 +16,11 @@
     });
   </script>
   
-  <h1>Questions</h1>
-  <h2>Add a Question</h2>
+  <h2>Questions</h2>
+  <h3>Add a Question</h3>
   <!-- When a new question is added, refreshQuestions will be triggered -->
   <QuestionForm {courseId} on:questionAdded={refreshQuestions} />
   
-  <h2>Existing Questions:</h2>
+  <h3>Existing Questions:</h3>
   <!-- Listen for refresh events (upvote/delete) from QuestionList -->
   <QuestionList {questions} {courseId} on:refresh={refreshQuestions} />
