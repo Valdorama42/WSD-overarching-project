@@ -1,7 +1,7 @@
 import { PUBLIC_API_URL } from "$env/static/public";
 
 const COURSE_ID = 1;
-const BASE_URL = `${PUBLIC_API_URL}/courses/${COURSE_ID}/questions`;
+const BASE_URL = `${PUBLIC_API_URL}/api/courses/${COURSE_ID}/questions`;
 
 export async function getQuestions() {
   const response = await fetch(BASE_URL);
