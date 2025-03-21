@@ -11,12 +11,10 @@
     });
 </script>
   
-<h1>Courses</h1>
-  
-<h2>Add a Course</h2>
+<h1>Courses</h1> 
 
 <CourseForm />
   
-<h2>Existing courses:</h2>
+<p>Existing courses: </p>
   
 <CourseList {courses}/>
