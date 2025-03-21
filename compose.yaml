@@ -40,7 +40,7 @@ services:
   database-migrations:
     image: flyway/flyway:10
     env_file:
-      - project.env
+      - production.env
     depends_on:
       - database
     volumes:
