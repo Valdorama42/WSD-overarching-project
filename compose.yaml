@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./client/src:/app/src
+      - /app/node_modules/
     ports:
       - 5173:5173
     depends_on:

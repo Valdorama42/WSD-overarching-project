@@ -15,7 +15,7 @@
 
 <form on:submit={addNewQuestion} class="flex flex-col space-y-4">
   <div>
-    <label for="title" class="block text-lime-700 font-medium mb-1">Title: </label>
+    <label for="title" class="block text-lime-700 font-medium mb-1 pt-3">Title: </label>
     <input 
       id="title" 
       name="title" 

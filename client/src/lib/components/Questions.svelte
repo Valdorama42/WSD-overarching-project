@@ -16,7 +16,7 @@
     });
   </script>
  
-<div class="max-w-2xl mx-auto p-6 bg-white shadow rounded">
+<div class="mx-auto p-6 bg-white shadow rounded">
     <h2 class="text-2xl font-bold text-lime-700 mb-4">Questions</h2>
     <section class="mb-6">
       <h3 class="text-lg font-semibold text-lime-600 border-b border-lime-300 pb-2">Add a Question</h3>
