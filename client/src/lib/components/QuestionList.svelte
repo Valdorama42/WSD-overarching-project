@@ -4,9 +4,9 @@
   export let courseId;
 </script>
 
-<ul>
+<ul class="space-y-4">
   {#each questions as q (q.id)}
-    <li>
+    <li class="p-3 bg-lime-50 rounded shadow">
       <QuestionItem {q} courseId={courseId} />
     </li>
   {/each}

@@ -2,4 +2,6 @@
     import Courses from "../../lib/components/Courses.svelte";
 </script>
 
-<Courses />
+<div class="p-4">
+    <Courses />
+</div>

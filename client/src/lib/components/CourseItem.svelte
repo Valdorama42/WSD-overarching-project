@@ -2,4 +2,6 @@
     export let course;
   </script>
   
-  <a href="/courses/{course.id}/">{course.name}</a>
+<div class="flex items-center space-x-2 justify-between">
+  <a href="/courses/{course.id}/" class="text-lime-700 text-lg font-bold hover:underline">{course.name}</a>
+</div>

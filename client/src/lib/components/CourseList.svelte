@@ -3,9 +3,9 @@
     export let courses = [];
   </script>
   
-  <ul>
+  <ul class="space-y-4">
     {#each courses as course (course.id)}
-      <li>
+      <li class="p-4 bg-lime-50 rounded shadow">
         <CourseItem {course} />
       </li>
     {/each}

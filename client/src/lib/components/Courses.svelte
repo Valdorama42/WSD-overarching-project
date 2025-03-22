@@ -10,11 +10,18 @@
         courses = await getCourses();
     });
 </script>
-  
-<h1>Courses</h1> 
+    
+<div>
+    <h1 class="text-3xl font-bold text-lime-700 mb-4">Courses</h1> 
 
-<CourseForm />
-  
-<p>Existing courses: </p>
-  
-<CourseList {courses}/>
+    <section class="mb-4">
+        <CourseForm />
+    </section>
+    
+    <section>
+        <p class="text-xl font-semibold text-lime-600 border-b border-lime-300 pb-2 mb-4">
+            Existing courses: 
+        </p>
+        <CourseList {courses}/>
+    </section>
+</div>

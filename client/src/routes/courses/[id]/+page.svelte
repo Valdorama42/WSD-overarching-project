@@ -4,6 +4,8 @@
     import Questions from '$lib/components/Questions.svelte';
   </script>
   
-  <h1>{course.name} (Course {courseId})</h1>
+  <h1 class="text-3xl font-bold text-lime-700 mb-4">{course.name} (Course {courseId})</h1>
   
-  <Questions {courseId} />
+  <div class="p-4">
+    <Questions {courseId} />
+  </div>
