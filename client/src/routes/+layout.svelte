@@ -6,10 +6,10 @@
 <div class="flex flex-col min-h-screen">
     <header class="bg-gradient-to-b from-lime-400 via-lime-500 to-lime-600 text-white p-4">
         <div class="container mx-auto text-center">
-          <h1 class="text-2xl font-bold">My App</h1>
+          <h1 class="text-4xl font-bold">My App</h1>
           <nav class="space-x-4">
-            <a href="/" class="hover:underline">Home</a>
-            <a href="/courses" class="hover:underline">Courses</a>
+            <a href="/" class="text-lg hover:underline">Home</a>
+            <a href="/courses" class="text-lg hover:underline">Courses</a>
           </nav>
         </div>
     </header>
