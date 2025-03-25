@@ -1,6 +1,6 @@
 <script>
     import "../app.css";
-    let { children } = $props();
+    let { children, data } = $props();
 </script>
 
 <div class="flex flex-col min-h-screen">
@@ -15,7 +15,10 @@
     </header>
 
     <main class="container mx-auto pb-16">
-        {@render children()}
+      {#if data.user?.email}
+        <p>Logged in as: {data.user.email}</p>
+      {/if}
+      {@render children()}
     </main>
 
   <footer class="bg-lime-100 text-lime-800 p-4 fixed bottom-0 left-0 right-0">

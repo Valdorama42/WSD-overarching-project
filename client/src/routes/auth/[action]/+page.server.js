@@ -1,7 +1,7 @@
 import { PUBLIC_INTERNAL_API_URL } from "$env/static/public";
 import { redirect } from "@sveltejs/kit";
 
-const COOKIE_KEY = "auth";
+const COOKIE_KEY = "token";
 
 const apiRequest = async (url, data) => {
   return await fetch(`${PUBLIC_INTERNAL_API_URL}${url}`, {
@@ -42,7 +42,7 @@ export const actions = {
     );
 
     if (response.ok) {
-      throw redirect(302, "/auth/login?registered=true");
+      throw redirect(302, "/auth/login");
     }
 
     return await response.json();
