@@ -8,6 +8,7 @@
     "npm:@sveltejs/vite-plugin-svelte@4": "4.0.4_svelte@5.17.1__acorn@8.14.0_vite@5.4.11",
     "npm:@tailwindcss/forms@~0.5.10": "0.5.10_tailwindcss@4.0.15",
     "npm:@tailwindcss/vite@^4.0.15": "4.0.15_vite@5.4.11_lightningcss@1.29.2",
+    "npm:jose@^6.0.10": "6.0.10",
     "npm:svelte@5": "5.17.1_acorn@8.14.0",
     "npm:tailwindcss@^4.0.15": "4.0.15",
     "npm:vite@^5.4.11": "5.4.11"
@@ -759,6 +760,9 @@
     "jiti@2.4.2": {
       "integrity": "sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A=="
     },
+    "jose@6.0.10": {
+      "integrity": "sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw=="
+    },
     "kleur@4.1.5": {
       "integrity": "sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ=="
     },
@@ -985,6 +989,7 @@
         "npm:@sveltejs/vite-plugin-svelte@4",
         "npm:@tailwindcss/forms@~0.5.10",
         "npm:@tailwindcss/vite@^4.0.15",
+        "npm:jose@^6.0.10",
         "npm:svelte@5",
         "npm:tailwindcss@^4.0.15",
         "npm:vite@^5.4.11"
