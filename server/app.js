@@ -1,14 +1,27 @@
 import { Hono } from "@hono/hono";
+import { getCookie, setCookie } from "jsr:@hono/hono@4.6.5/cookie";
 import { cors } from "@hono/hono/cors";
+import { hash, verify } from "jsr:@denorg/scrypt@4.4.4";
+import * as jwt from "jsr:@hono/hono@4.6.5/jwt";
 import { logger } from "@hono/hono/logger";
 import postgres from "postgres";
 
 const sql = postgres();
 
+const COOKIE_KEY = "token";
+const JWT_SECRET = "wsd-project-secret";
+
 const app = new Hono();
 
-app.use("/*", cors());
 app.use("/*", logger());
+
+app.use(
+  "/*",
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.get("/api/courses", async (c) => {
   const courses = await sql`SELECT id, name FROM courses ORDER BY id`;
@@ -91,6 +104,51 @@ app.delete("/api/courses/:id/questions/:qId", async (c) => {
     RETURNING id, title, text, upvotes, course_id
   `;
   return c.json(questions[0]);
+});
+
+const clean = (data) => {
+  data.email = data.email.trim().toLowerCase();
+  data.password = data.password.trim();
+};
+
+app.post("/api/auth/register", async (c) => {
+  const data = await c.req.json();
+  clean(data);
+
+  const result = await sql`INSERT INTO users (email, password_hash)
+    VALUES (${data.email}, ${hash(data.password)}) RETURNING *`;
+
+  return c.json(result[0]);
+});
+
+app.post("/api/auth/login", async (c) => {
+  const data = await c.req.json();
+  clean(data);
+
+  const result = await sql`SELECT * FROM users
+    WHERE email = ${data.email}`;
+
+  if (result.length === 0) {
+    return c.json({ message: "Incorrect email or password." });
+  }
+
+  const user = result[0];
+
+  const passwordValid = verify(data.password, user.password_hash);
+  if (passwordValid) {
+    const payload = { email: user.email };
+    const token = await jwt.sign(payload, JWT_SECRET);
+
+    setCookie(c, COOKIE_KEY, token, {
+      path: "/",
+      domain: "localhost",
+      httpOnly: true,
+      sameSite: "lax",
+    });
+    return c.json({ message: "Welcome!" });
+  } else {
+    return c.json({ message: "Incorrect email or password." });
+  }
 });
 
 export default app;
