@@ -23,6 +23,13 @@ app.use(
   })
 );
 
+const userMiddleware = async (c, next) => {
+  const token = getCookie(c, COOKIE_KEY);
+  const { payload } = jwt.decode(token, JWT_SECRET);
+  c.user = payload;
+  await next();
+};
+
 app.get("/api/courses", async (c) => {
   const courses = await sql`SELECT id, name FROM courses ORDER BY id`;
   return c.json(courses);
@@ -149,6 +156,89 @@ app.post("/api/auth/login", async (c) => {
   } else {
     return c.json({ message: "Incorrect email or password." });
   }
+});
+
+app.get("/api/courses/:id/questions/:qId", async (c) => {
+  const qId = Number(c.req.param("qId"));
+  const courseId = Number(c.req.param("id"));
+  const questions = await sql`
+    SELECT id, title, text, upvotes, course_id
+    FROM questions
+    WHERE course_id = ${qId} AND id = ${courseId}
+  `;
+  return c.json(questions[0]);
+});
+
+app.get("/api/courses/:id/questions/:qId/answers", async (c) => {
+  const qId = Number(c.req.param("qId"));
+  const answers = await sql`
+    SELECT id, question_id, upvotes, text
+    FROM question_answers
+    WHERE question_id = ${qId}
+    ORDER BY id
+  `;
+  return c.json(answers);
+});
+
+app.use(
+  "/api/courses/:id/questions/:qId/answers",
+  jwt.jwt({
+    cookie: COOKIE_KEY,
+    secret: JWT_SECRET,
+  }),
+);
+
+app.use("/api/courses/:id/questions/:qId/answers", userMiddleware);
+
+app.post("/api/courses/:id/questions/:qId/answers", async (c) => {
+  const qId = Number(c.req.param("qId"));
+  const { text } = await c.req.json();
+  if (!text || text.length < 3) {
+    return c.json({ error: "Answer text must be at least 3 characters long" }, 400);
+  }
+
+  // Retrieve user identifier from the database using the email in the token
+  const userResult = await sql`SELECT id FROM users WHERE email = ${c.user.email}`;
+  if (userResult.length === 0) {
+    return c.json({ error: "User not found" }, 401);
+  }
+  const userId = userResult[0].id;
+
+  // Insert the answer into the database
+  const answers = await sql`
+    INSERT INTO question_answers (question_id, user_id, text)
+    VALUES (${qId}, ${userId}, ${text})
+    RETURNING id, user_id, text, upvotes, question_id
+  `;
+  return c.json(answers[0]);
+});
+
+app.use(
+  "/api/courses/:id/questions/:qId/answers/:aId/upvote",
+  jwt.jwt({
+    cookie: COOKIE_KEY,
+    secret: JWT_SECRET,
+  }),
+);
+
+app.use("/api/courses/:id/questions/:qId/answers/:aId/upvote", userMiddleware);
+
+app.post("/api/courses/:id/questions/:qId/answers/:aId/upvote", async (c) => {
+  const qId = Number(c.req.param("qId"));
+  const aId = Number(c.req.param("aId"));
+
+  // Ensure the user is authenticated
+  if (!c.user) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+
+  const answers = await sql`
+    UPDATE question_answers
+    SET upvotes = upvotes + 1
+    WHERE id = ${aId} AND question_id = ${qId}
+    RETURNING id, user_id, text, upvotes, question_id
+  `;
+  return c.json(answers[0]);
 });
 
 export default app;
